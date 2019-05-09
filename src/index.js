@@ -1,23 +1,47 @@
-const p5 = require('p5')
-const Player = require('./objects/player')
+//require('dotenv').config()
 
+const p5 = require('p5')
+const World = require('./classes/world')
+const Player = require('./classes/player')
+
+const worldsize = 1000
+const viewport = 800
+
+let world
 let player
 
 setup = () => {
-  createCanvas(800, 800)
-  background(0)
+  createCanvas(viewport, viewport)
 
-  player = new Player(400, 400)
+  world = createWorld()
+
+  player = new Player(0, 0)
 }
 
 draw = () => {
+  background(0)
+
+  player.move(worldsize, viewport, viewport)
+  player.show(viewport / 2, viewport / 2)
+  
+  world.showPlayers(player.x, player.y)
+
   debug()
-  player.show()
 }
 
 debug = () => {
-  //POS
+  //player position
   textSize(32)
   fill(255)
   text(`x: ${player.x} y: ${player.y}`, 10, 30)
+}
+
+createWorld = () => {
+  let players = []
+
+  for(let i = 0; i < 200; i++){
+    players.push(new Player(Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000)))
+  }
+
+  return new World(players, viewport)
 }
