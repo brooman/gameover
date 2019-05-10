@@ -3,12 +3,14 @@
 const p5 = require('p5')
 const World = require('./classes/world')
 const Player = require('./classes/player')
+const Food = require('./classes/food')
 
 const worldsize = 1000
 const viewport = 800
 
 let world
 let player
+let newFood = []
 
 setup = () => {
   createCanvas(viewport, viewport)
@@ -16,6 +18,10 @@ setup = () => {
   world = createWorld()
 
   player = new Player(0, 0)
+
+  for (let index = 0; index < 10; index++) {
+    newFood.push(new Food(15))
+  }
 }
 
 draw = () => {
@@ -25,6 +31,10 @@ draw = () => {
   player.show(viewport / 2, viewport / 2)
   
   world.showPlayers(player.x, player.y)
+
+  newFood.forEach(food => {
+    food.showFood()
+  })
 
   debug()
 }
