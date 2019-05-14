@@ -1,9 +1,9 @@
 class Food {
 
-    constructor(r) {
-        this.r = r
-        this.xPos = random(0, 1000)
-        this.yPos = random(0, 1000)
+    constructor(x, y) {
+        this.x = x
+        this.y = y
+        this.radius = 10
         this.color = this.getRandomColor()
     }
 
@@ -15,9 +15,9 @@ class Food {
        return color(r,g,b)
     }
 
-    showFood() {
+    show(x, y) {
         fill(this.color)
-        ellipse(this.xPos,this.yPos,this.r,this.r)
+        circle(x, y, this.radius * 2)
     }
 
 

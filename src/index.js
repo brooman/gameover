@@ -10,7 +10,7 @@ const viewport = 800
 
 let world
 let player
-let newFood = []
+let food
 
 setup = () => {
   createCanvas(viewport, viewport)
@@ -19,9 +19,6 @@ setup = () => {
 
   player = new Player(0, 0)
 
-  for (let index = 0; index < 10; index++) {
-    newFood.push(new Food(15))
-  }
 }
 
 draw = () => {
@@ -31,10 +28,7 @@ draw = () => {
   player.show(viewport / 2, viewport / 2)
   
   world.showPlayers(player.x, player.y)
-
-  newFood.forEach(food => {
-    food.showFood()
-  })
+  world.showFood(player.x, player.y)
 
   debug()
 }
@@ -48,10 +42,15 @@ debug = () => {
 
 createWorld = () => {
   let players = []
+  let newFood = []
 
   for(let i = 0; i < 200; i++){
     players.push(new Player(Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000)))
   }
 
-  return new World(players, viewport)
+  for(let i = 0; i < 200; i++){
+    newFood.push(new Food(random(0, 1000), random(0, 1000)))
+  }
+
+  return new World(players, newFood, viewport)
 }
