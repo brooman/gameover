@@ -1,17 +1,19 @@
+const Player = require('../player')
 class World {
 
-  constructor(players, viewport) {
+  constructor(viewport) {
     this.size = process.env.WORLD_SIZE
     this.viewport = viewport
-    this.players = players
+    this.players = []
   }
 
-  updatePlayers() {
-
+  update(id, gamestate) {
+    this.players = gamestate.players.map(player => {
+        return new Player(player.id, player.size, player.x, player.y)
+    })
   }
 
   showPlayers(x, y) {
-
     this.players.map(player => {
       if(dist(player.x, player.y, x, y) < this.viewport * 2) {
 

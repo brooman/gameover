@@ -11,7 +11,7 @@
     "socket.io": "^2.2.0"
   },
   "scripts": {
-    "server": "node server.js",
+    "server": "node server/index.js",
     "start": "parcel index.html",
     "build": "parcel build index.html"
   },

@@ -1,11 +1,13 @@
 class Player {
 
-  constructor(x, y) {
+  constructor(id, size, x, y) {
+    this.id = id
+
     this.x = x
     this.y = y
 
     this.speed = 3
-    this.radius = 10
+    this.size = size
   }
 
   updatePosition(x, y) {
@@ -15,7 +17,7 @@ class Player {
 
   show(x, y) {
     fill(100, 200, 500)
-    circle(x, y, this.radius * 2)
+    circle(x, y, this.size * 2)
   }
 
   move(worldSize, vw, vh) {
