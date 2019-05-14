@@ -1,6 +1,7 @@
 //require('dotenv').config()
 
 const p5 = require('p5')
+const socket = require('socket.io')
 const World = require('./classes/world')
 const Player = require('./classes/player')
 
