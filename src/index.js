@@ -1,7 +1,8 @@
-//require('dotenv').config()
+require('dotenv').config({ path: __dirname + "../" })
 
 const p5 = require('p5')
-const socket = require('socket.io')
+const socket = require('socket.io-client')(process.env.SOCKET)
+
 const World = require('./classes/world')
 const Player = require('./classes/player')
 
