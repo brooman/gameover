@@ -3,6 +3,7 @@
 const p5 = require('p5')
 const World = require('./classes/world')
 const Player = require('./classes/player')
+const Food = require('./classes/food')
 
 const worldsize = 1000
 const viewport = 800
@@ -16,6 +17,7 @@ setup = () => {
   world = createWorld()
 
   player = new Player(0, 0)
+
 }
 
 draw = () => {
@@ -25,6 +27,7 @@ draw = () => {
   player.show(viewport / 2, viewport / 2)
   
   world.showPlayers(player.x, player.y)
+  world.showFood(player.x, player.y)
 
   debug()
 }
@@ -38,10 +41,15 @@ debug = () => {
 
 createWorld = () => {
   let players = []
+  let food = []
 
   for(let i = 0; i < 200; i++){
     players.push(new Player(Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000)))
   }
 
-  return new World(players, viewport)
+  for(let i = 0; i < 200; i++){
+    food.push(new Food(random(0, 1000), random(0, 1000)))
+  }
+
+  return new World(players, food, viewport)
 }
