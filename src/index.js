@@ -21,7 +21,7 @@ setup = () => {
 }
 
 draw = () => {
-  background(0)
+  background(244,251,255)
 
   player.move(worldsize, viewport, viewport)
   player.show(viewport / 2, viewport / 2)
@@ -35,7 +35,7 @@ draw = () => {
 debug = () => {
   //player position
   textSize(32)
-  fill(255)
+  fill(0)
   text(`x: ${player.x} y: ${player.y}`, 10, 30)
 }
 
@@ -44,7 +44,7 @@ createWorld = () => {
   let food = []
 
   for(let i = 0; i < 200; i++){
-    players.push(new Player(Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000)))
+    players.push(new Player(random(0, 1000), random(0, 1000)))
   }
 
   for(let i = 0; i < 200; i++){
