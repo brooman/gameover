@@ -30,6 +30,10 @@ socket.on('created', (createdPlayer) => {
         y: player.y
       })
     })
+
+    socket.on('grow', (size) => {
+      player.grow(size)
+    })
   }
 
   draw = () => {

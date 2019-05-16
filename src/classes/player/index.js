@@ -28,7 +28,11 @@ class Player {
     const c = colors[Math.floor(Math.random() * colors.length)]
 
     return color(c.r, c.g, c.b)
-}
+  }
+
+  grow(size) {
+    this.size += size
+  }
 
   updatePosition(x, y) {
     this.x = x

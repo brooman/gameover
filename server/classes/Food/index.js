@@ -2,8 +2,8 @@ class Player {
 
   constructor(id) {
     this.id = id
-    
-    this.size = process.env.DEFAULT_FOOD_SIZE
+
+    this.size = parseInt(process.env.DEFAULT_FOOD_SIZE)
     this.x = Math.floor(Math.random() * process.env.WORLD_SIZE) + 1
     this.y = Math.floor(Math.random() * process.env.WORLD_SIZE) + 1
   }
@@ -17,7 +17,7 @@ class Player {
   }
 
   die() {
-    this.size = process.env.DEFAULT_PLAYER_SIZE
+    this.size = parseInt(process.env.DEFAULT_PLAYER_SIZE)
     this.x = Math.floor(Math.random() * process.env.WORLD_SIZE) + 1
     this.y = Math.floor(Math.random() * process.env.WORLD_SIZE) + 1
   }

@@ -73,7 +73,7 @@ class GameController {
             player1.eat(player2.size)
             player2.die()
 
-            //Restart player2s game
+            this.io.sockets.connected[player1.id].emit('grow', player1.size)
             this.io.sockets.connected[player2.id].emit('created', player2.status())
           }
         }
@@ -89,6 +89,8 @@ class GameController {
 
             player1.eat(food.size)
             food.die()
+
+            this.io.sockets.connected[player1.id].emit('grow', player1.size)
           }
         }
 
