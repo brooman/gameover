@@ -5,6 +5,7 @@ const socket = require('socket.io-client')(process.env.SOCKET)
 
 const World = require('./classes/world')
 const Player = require('./classes/player')
+const Food = require('./classes/food')
 
 socket.on('created', (createdPlayer) => {
 
