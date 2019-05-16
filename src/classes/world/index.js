@@ -10,7 +10,6 @@ class World {
   }
 
   update(gamestate) {
-    console.log(gamestate)
     this.players = gamestate.players.map(player => {
         return new Player(player.id, player.size, player.x, player.y)
     })
