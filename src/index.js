@@ -23,7 +23,7 @@ socket.on('created', (createdPlayer) => {
     player = new Player(createdPlayer.id, createdPlayer.size, createdPlayer.x, createdPlayer.y)
 
     socket.on('update', (gamestate) => {
-      world.update(player.id, JSON.parse(gamestate))
+      world.update(JSON.parse(gamestate))
 
       socket.emit('move', {
         x: player.x,

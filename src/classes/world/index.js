@@ -1,4 +1,5 @@
 const Player = require('../player')
+const Food = require('../food')
 class World {
   
   constructor(viewport) {
@@ -8,9 +9,14 @@ class World {
     this.food = []
   }
 
-  update(id, gamestate) {
+  update(gamestate) {
+    console.log(gamestate)
     this.players = gamestate.players.map(player => {
         return new Player(player.id, player.size, player.x, player.y)
+    })
+
+    this.food = gamestate.food.map(food => {
+      return new Food(food.id, food.size, food.x, food.y)
     })
   }
 
