@@ -1,14 +1,22 @@
+const Player = require('../player')
+const Food = require('../food')
 class World {
-
-  constructor(players, food, viewport) {
+  
+  constructor(viewport) {
     this.size = process.env.WORLD_SIZE
     this.viewport = viewport
-    this.players = players
-    this.food = food
+    this.players = []
+    this.food = []
   }
 
-  updatePlayers() {
+  update(gamestate) {
+    this.players = gamestate.players.map(player => {
+        return new Player(player.id, player.size, player.x, player.y)
+    })
 
+    this.food = gamestate.food.map(food => {
+      return new Food(food.id, food.size, food.x, food.y)
+    })
   }
 
   showFood(x, y) {
@@ -22,10 +30,8 @@ class World {
   }
 
   showPlayers(x, y) {
-
     this.players.map(player => {
       if(dist(player.x, player.y, x, y) < this.viewport * 2) {
-
         const rx = this.viewport + player.x - x
         const ry = this.viewport + player.y - y
         player.show(rx, ry)

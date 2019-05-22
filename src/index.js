@@ -1,55 +1,56 @@
-//require('dotenv').config()
+require('dotenv').config({ path: __dirname + "/../.env" })
 
 const p5 = require('p5')
+const socket = require('socket.io-client')(process.env.SOCKET)
+
 const World = require('./classes/world')
 const Player = require('./classes/player')
 const Food = require('./classes/food')
 
-const worldsize = 1000
-const viewport = 800
+socket.on('created', (createdPlayer) => {
 
-let world
-let player
+  const worldsize = process.env.WORLD_SIZE
+  const viewport = 800
 
-setup = () => {
-  createCanvas(viewport, viewport)
-
-  world = createWorld()
-
-  player = new Player(0, 0)
-
-}
-
-draw = () => {
-  background(244,251,255)
-
-  player.move(worldsize, viewport, viewport)
-  player.show(viewport / 2, viewport / 2)
+  let world
+  let player
   
-  world.showPlayers(player.x, player.y)
-  world.showFood(player.x, player.y)
+  setup = () => {
 
-  debug()
-}
+    createCanvas(viewport, viewport)
 
-debug = () => {
-  //player position
-  textSize(32)
-  fill(0)
-  text(`x: ${player.x} y: ${player.y}`, 10, 30)
-}
+    world = new World(viewport)
+    player = new Player(createdPlayer.id, createdPlayer.size, createdPlayer.x, createdPlayer.y)
 
-createWorld = () => {
-  let players = []
-  let food = []
+    socket.on('update', (gamestate) => {
+      world.update(JSON.parse(gamestate))
 
-  for(let i = 0; i < 200; i++){
-    players.push(new Player(random(0, 1000), random(0, 1000)))
+      socket.emit('move', {
+        x: player.x,
+        y: player.y
+      })
+    })
+
+    socket.on('grow', (size) => {
+      player.grow(size)
+    })
   }
 
-  for(let i = 0; i < 200; i++){
-    food.push(new Food(random(0, 1000), random(0, 1000)))
+  draw = () => {
+    background(0)
+
+    player.move(worldsize, viewport, viewport)
+    player.show(viewport / 2, viewport / 2)
+    
+    world.showPlayers(player.x, player.y)
+
+    debug()
   }
 
-  return new World(players, food, viewport)
-}
+  debug = () => {
+    //player position
+    textSize(32)
+    fill(255)
+    text(`x: ${player.x} y: ${player.y}`, 10, 30)
+  }
+})
