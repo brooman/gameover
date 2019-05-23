@@ -1,10 +1,9 @@
 class Food {
 
-    constructor(id, size, x, y) {
-        this.id = id
+    constructor(x, y) {
         this.x = x
         this.y = y
-        this.size = size
+        this.radius = 10
         this.color = this.getRandomColor()
     }
 
@@ -32,7 +31,7 @@ class Food {
 
     show(x, y) {
         fill(this.color)
-        circle(x, y, this.size * 2)
+        circle(x, y, this.radius * 2)
     }
 
 
