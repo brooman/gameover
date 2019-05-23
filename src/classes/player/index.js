@@ -1,14 +1,11 @@
 class Player {
 
-  constructor(id, size, x, y) {
-    this.id = id
-
+  constructor(x, y) {
     this.x = x
     this.y = y
 
     this.speed = 3
-    this.size = size
-    
+    this.radius = 10
     this.color = this.getRandomColor()
   }
 
@@ -28,11 +25,7 @@ class Player {
     const c = colors[Math.floor(Math.random() * colors.length)]
 
     return color(c.r, c.g, c.b)
-  }
-
-  grow(size) {
-    this.size += size
-  }
+}
 
   updatePosition(x, y) {
     this.x = x
@@ -41,7 +34,7 @@ class Player {
 
   show(x, y) {
     fill(this.color)
-    circle(x, y, this.size * 2)
+    circle(x, y, this.radius * 2)
   }
 
   move(worldSize, vw, vh) {
