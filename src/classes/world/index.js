@@ -1,37 +1,32 @@
+const Cell = require('../cell')
 class World {
 
-  constructor(players, cell, viewport) {
+  constructor() {
     this.size = process.env.WORLD_SIZE
-    this.viewport = viewport
-    this.players = players
-    this.cell = cell
+    this.players = []
+    this.food = []
   }
 
-  updatePlayers() {
+  update(gamestate) {
+    this.players = gamestate.players.map(player => {
+        return new Cell(player.id, player.x, player.y, player.size, player.color)
+    })
 
-  }
-
-  showcell(x, y) {
-    this.cell.map(cell => {
-      if(dist(cell.x, cell.y, x, y) < this.viewport *2) {
-        const rx = this.viewport + cell.x - x
-        const ry = this.viewport + cell.y - y
-        cell.show(rx, ry)
-      }
+    this.food = gamestate.food.map(food => {
+      return new Cell(food.id, food.x, food.y, food.size, food.color)
     })
   }
 
-  showPlayers(x, y) {
-
+  showPlayers(id) {
     this.players.map(player => {
-      if(dist(player.x, player.y, x, y) < this.viewport * 2) {
-
-        const rx = this.viewport + player.x - x
-        const ry = this.viewport + player.y - y
-        player.show(rx, ry)
+      if(player.id !== id) {
+        player.show()
       }
     })
+  }
 
+  showFood() {
+    this.food.map(food => food.show())
   }
 }
 

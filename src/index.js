@@ -1,52 +1,69 @@
-//require('dotenv').config()
+require('dotenv').config()
 
 const p5 = require('p5')
+const socket = require('socket.io-client')(process.env.SOCKET)
+
 const Cell = require('./classes/cell')
-const Food = require('./classes/food')
 const World = require('./classes/world')
 
-// const worldsize = 1000
-const viewport = 800
-
+let running = false
 let world
 let player
 let zoom = 1
 
+socket.on('created', (playerState) => {
+  startGame(playerState)
+})
+
 setup = () => {
-  createCanvas(viewport, viewport)
-
-  world = createWorld()
-
-  player = new Cell(width/2, height/2, 16) 
-
+  createCanvas(800, 800)
 }
 
 draw = () => {
-  background(244,251,255)
+  if (running) {
+    background(244, 251, 255)
 
-  translate(width/2, height/2)
-  zoom = lerp(zoom, 20 / player.r, 0.1)
-  scale(zoom)
-  translate(-player.pos.x, -player.pos.y)
+    translate(width / 2, height / 2)
+    zoom = lerp(zoom, 20 / player.r, 0.1)
+    scale(zoom)
+    translate(-player.pos.x, -player.pos.y)
 
-  player.show()
-  player.update()
-  
-  world.showPlayers(player.x, player.y)
-  world.showFood(player.x, player.y)
+    player.update()
 
+    world.showFood()
+    world.showPlayers(player.id)
+
+    player.show()
+  }
 }
 
-createWorld = () => {
-  let players = []
-  let cells = []
+startGame = (playerState) => {
+  world = new World()
 
-  for (let i = 0; i < 100; i++) {
-    let x = random(-width, width)
-    let y = random(-height, height)
-    cells[i] = new Cell(x, y, 12)
-    
-}
+  player = new Cell(
+    playerState.id,
+    playerState.x,
+    playerState.y,
+    playerState.size,
+    playerState.color,
+  )
 
-  return new World(players, cells, viewport)
+  socket.on('update', (gamestate) => {
+    world.update(JSON.parse(gamestate))
+
+    socket.emit('move', {
+      x: player.pos.x,
+      y: player.pos.y,
+    })
+  })
+
+  socket.on('grow', (size) => {
+    player.grow(size)
+  })
+
+  socket.on('sync', (status) => {
+    player.sync(JSON.parse(status))
+  })
+
+  running = true
 }
