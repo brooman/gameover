@@ -1,22 +1,22 @@
 class World {
 
-  constructor(players, food, viewport) {
+  constructor(players, cell, viewport) {
     this.size = process.env.WORLD_SIZE
     this.viewport = viewport
     this.players = players
-    this.food = food
+    this.cell = cell
   }
 
   updatePlayers() {
 
   }
 
-  showFood(x, y) {
-    this.food.map(food => {
-      if(dist(food.x, food.y, x, y) < this.viewport *2) {
-        const rx = this.viewport + food.x - x
-        const ry = this.viewport + food.y - y
-        food.show(rx, ry)
+  showcell(x, y) {
+    this.cell.map(cell => {
+      if(dist(cell.x, cell.y, x, y) < this.viewport *2) {
+        const rx = this.viewport + cell.x - x
+        const ry = this.viewport + cell.y - y
+        cell.show(rx, ry)
       }
     })
   }
