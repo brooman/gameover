@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config({ path: __dirname + "/../.env" })
 
 const p5 = require('p5')
 const socket = require('socket.io-client')(process.env.SOCKET)
@@ -49,7 +49,7 @@ startGame = (playerState) => {
   )
 
   socket.on('update', (gamestate) => {
-    world.update(JSON.parse(gamestate))
+    world.update(gamestate)
 
     socket.emit('move', {
       x: player.pos.x,
@@ -62,7 +62,7 @@ startGame = (playerState) => {
   })
 
   socket.on('sync', (status) => {
-    player.sync(JSON.parse(status))
+    player.sync(status)
   })
 
   running = true
