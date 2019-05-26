@@ -11,7 +11,7 @@ class Food {
   }
 
   getRandomColor() {
-    
+
     let colors = [
       {r: 218, g: 252, b: 82},
       {r: 231, g: 61, b: 247},
@@ -21,9 +21,9 @@ class Food {
       {r: 234, g: 55, b: 143},
       {r: 234, g: 55, b: 132},
     ]
-    
+
     const c = colors[Math.floor(Math.random() * colors.length)]
-    
+
     return c
   }
 
