@@ -12,4 +12,4 @@ Gameover is a multiplayer game made with p5 and socket.io
 
 ## License
 
-[MIT](LICENSE) ® [André Broman](https://github.com/brooman), [Samuel Johansson](https://github.com/websamuel90)
+[MIT](LICENSE) ©️ [André Broman](https://github.com/brooman), [Samuel Johansson](https://github.com/websamuel90)
