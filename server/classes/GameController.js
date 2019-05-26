@@ -52,6 +52,22 @@ class GameController {
     if (player.x >= 0 && player.x <= this.worldSize && player.y >= 0 && player.y <= this.worldSize) {
       player.move(x, y)
     } else {
+
+      if(player.x < 0) {
+        player.x = 10
+      }
+
+      if(player.x > this.worldSize) {
+        player.x = this.worldSize - 10
+      }
+
+      if(player.y < 0) {
+        player.y = 10
+      }
+
+      if(player.y > this.worldSize) {
+        player.y = this.worldSize - 10
+      }
       //Send event making client sync up with server
       this.io.sockets.connected[player.id].emit('sync', player.status())
     }
@@ -125,7 +141,7 @@ class GameController {
       food: this.food.map(food => food.status())
     }
 
-    return JSON.stringify(gamestate)
+    return gamestate
   }
 }
 

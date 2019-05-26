@@ -25,7 +25,7 @@ class Cell {
 
   sync(status) {
     this.id = status.id
-    this.pos = createVector(status.x, status.y)
+    this.pos.set(status.x, status.y)
     this.r = status.size
   }
 }
