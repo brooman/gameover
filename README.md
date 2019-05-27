@@ -13,3 +13,8 @@ Gameover is a multiplayer game made with p5 and socket.io
 ## License
 
 [MIT](LICENSE) ©️ [André Broman](https://github.com/brooman), [Samuel Johansson](https://github.com/websamuel90)
+
+## Feedback from group 12
+- In "src/classes/world/index.js", try not to instantiate classes in update-function.
+- Nice file structure, the code is easy to read due to separation into different files.
+- Remember to delete unused code, see commented code in index.html.
