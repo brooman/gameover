@@ -49,7 +49,7 @@ class Player {
   }
 
   eat(size) {
-    this.size += size * 0.01
+    this.size += size * 0.02
   }
 }
 
