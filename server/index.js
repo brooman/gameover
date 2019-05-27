@@ -2,10 +2,10 @@ require('dotenv').config({ path: __dirname + "/../.env" })
 const path = require('path')
 
 const express = require('express')
-const app = express();
+const app = express()
 
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
 
 const GameController = require('./classes/GameController')
 const Game = new GameController(io)

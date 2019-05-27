@@ -16,7 +16,7 @@ class GameController {
 
   /**
    * Add a player to the game
-   * @param id: String 
+   * @param id: String
    */
   addPlayer(id) {
 
@@ -28,7 +28,7 @@ class GameController {
 
   /**
    * Remove a player from the game
-   * @param id: String 
+   * @param id: String
    */
   removePlayer(id) {
 
@@ -41,7 +41,7 @@ class GameController {
 
   /**
    * Update player position
-   * @param id: String 
+   * @param id: String
    */
   movePlayer(id, x, y) {
     const player = this.players.find(player => {
@@ -88,7 +88,7 @@ class GameController {
 
       //Check player collisions
       this.players.map(player2 => {
-  
+
         const distance = this.calcDistance(player1.x, player2.x, player1.y, player2.y)
 
         if(player1.size > distance) {
