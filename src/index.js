@@ -9,7 +9,6 @@ const World = require('./classes/world')
 let running = false
 let world
 let player
-let zoom = 1
 
 socket.on('created', (playerState) => {
   startGame(playerState)
@@ -24,8 +23,6 @@ draw = () => {
     background(244, 251, 255)
 
     translate(width / 2, height / 2)
-    zoom = lerp(zoom, 20 / player.r, 0.1)
-    scale(zoom)
     translate(-player.pos.x, -player.pos.y)
 
     player.update()
